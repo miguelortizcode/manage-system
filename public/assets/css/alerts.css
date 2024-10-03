@@ -1,0 +1,39 @@
+/* Estilos para las alertas */
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    border-radius: 5px;
+    color: #fff;
+    display: none; /* Ocultar por defecto */
+    z-index: 1000;
+    animation: fadeIn 0.5s;
+}
+
+.alert.success {
+    background-color: #4CAF50; /* Verde */
+}
+
+.alert.error {
+    background-color: #f44336; /* Rojo */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.alert-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit; /* Para que el color herede del texto */
+    font-weight: bold;
+    margin-left: 10px;
+}
