@@ -2,7 +2,7 @@
 function showAlert(message, type) {
     const alertBox = document.getElementById('alert');
     const alertMessage = document.getElementById('alert-message');
-    const closeButton = document.getElementById('close-alert');
+    const closeButton = document.getElementById('close__alert');
 
     alertMessage.textContent = message;
     alertBox.className = `alert ${type}`;

@@ -109,3 +109,11 @@ body {
     margin-top: 10px;    
     color: var(--background-submit);
 }
+
+.input__error{
+    border: 1px solid #F00000;
+}
+
+.input__success{
+    border: 1px solid #0a8;
+}

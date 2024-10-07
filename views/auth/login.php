@@ -19,10 +19,8 @@
 </head>
 
 <body>
-    <div id="alert" class="alert">
-        <span id="alert-message"></span>
-        <button id="close-alert" class="alert-button">X</button>
-    </div>
+    <?php  include 'views/alerts/alerts.php' ?>
+
     <form action="/login" method="POST" class="container__form" id="form">
 
         <h1 class="form__title">Inicio de sesión</h1>
@@ -55,5 +53,4 @@
 </body>
 <script src="/public/assets/js/validateLogin.js"></script>
 <script src="/public/assets/js/alerts.js"></script>
-
 </html>

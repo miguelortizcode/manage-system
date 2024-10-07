@@ -1,26 +1,89 @@
-document.getElementById('form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevenir el envío del formulario
+// Variables para los elementos del formulario
+const form = document.getElementById('form');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
 
-    // Obtener valores de los campos
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
+// Evento de envío del formulario
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Evitar el envío del formulario
+    validateForm();
+});
+
+// Eventos de los inputs
+emailInput.addEventListener('input', () => validateInput(emailInput, validateEmail));
+passwordInput.addEventListener('input', () => validateInput(passwordInput, validatePassword));
+
+// Función para validar el formulario
+function validateForm() {
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    let valid = true;
 
     // Validación del correo electrónico
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(email)) {
-        showAlert('Por favor, introduce un correo electrónico válido.', 'error');
-        return;
+    if (!validateEmail(email)) {
+        valid = false;
     }
 
     // Validación de la contraseña
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    if (!passwordRegex.test(password)) {
-        showAlert('La contraseña debe tener al menos 8 caracteres, incluyendo una mayúscula, una minúscula, un número y un carácter especial.', 'error');
-        return;
+    if (!validatePassword(password)) {
+        valid = false;
     }
 
-    // Si las validaciones son exitosas, se puede enviar el formulario
-    showAlert('Inicio de sesión exitoso!', 'success');
-    // Aquí puedes proceder a enviar el formulario si es necesario, por ejemplo:
-    // this.submit();
-});
+    // Mostrar mensaje final y enviar el formulario si es válido
+    if (valid) {
+        showAlert('Inicio de sesión exitoso', 'success');
+        // Simulando el envío del formulario
+        form.submit(); // Asegúrate de que este sea el comportamiento deseado.
+    } else {
+        showAlert('Por favor, corrige los errores en el formulario.', 'warning');
+    }
+}
+
+// Validar los inputs
+function validateInput(inputElement, validateFunction) {
+    const isValid = validateFunction(inputElement.value.trim());
+    applyStyle(inputElement, isValid);
+}
+
+// Aplicar estilos según corresponda
+function applyStyle(inputElement, isValid) {
+    if (isValid) {
+        inputElement.classList.remove('input__error');
+        inputElement.classList.add('input__success');
+    } else {
+        inputElement.classList.remove('input__success');
+        inputElement.classList.add('input__error');
+    }
+}
+
+// Función de validación para el correo
+function validateEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (email === '') {
+        showAlert('El correo electrónico es obligatorio', 'warning');
+        return false; 
+    }
+
+    if (!emailRegex.test(email)) {
+        showAlert('El correo electrónico no es válido', 'warning');
+        return false; 
+    }
+
+    return true; // Retorna true si la validación es exitosa
+}
+
+// Función de validación para la contraseña
+function validatePassword(password) {
+    if (password === '') {
+        showAlert('La contraseña es obligatoria', 'warning');
+        return false;
+    }
+
+    if (password.length < 8) {
+        showAlert('La contraseña debe tener al menos 8 caracteres', 'warning');
+        return false;
+    }
+
+    return true; // Retorna true si la validación es exitosa
+}
