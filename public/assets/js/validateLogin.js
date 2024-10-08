@@ -35,7 +35,7 @@ function validateForm() {
         // Simulando el envío del formulario
         form.submit(); // Asegúrate de que este sea el comportamiento deseado.
     } else {
-        showAlert('Por favor, corrige los errores en el formulario.', 'warning');
+        showAlert('Todos los campos son obligatorios.', 'warning');
     }
 }
 
